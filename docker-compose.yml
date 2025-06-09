@@ -1,0 +1,22 @@
+services:
+  peoplecount-db:
+    image: mongo:7
+    container_name: peoplecount-db
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:27019:27017"
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_DATABASE: peoplecount
+    volumes:
+      - peoplecount-db-data:/data/db
+    networks:
+      - peoplecount-net
+
+volumes:
+  peoplecount-db-data:
+
+networks:
+  peoplecount-net:
+    driver: bridge
